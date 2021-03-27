@@ -109,7 +109,7 @@ class PlayersController extends AppBaseController
         $gender_id = $players->gender->id;
         $type_id = $players->playertype->id;
         
-        return view('players.edit', compact('players', 'sports', 'gender', 'type', 'sport_id', 'gender_id', 'type_id');
+        return view('players.edit', compact('players', 'sports', 'gender', 'type', 'sport_id', 'gender_id', 'type_id'));
     }
 
     /**
