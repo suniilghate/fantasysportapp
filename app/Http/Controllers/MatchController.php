@@ -61,9 +61,9 @@ class MatchController extends AppBaseController
     {
         $input = $request->all();
 
-        $matchDate = $this->matchRepository->checkSeriesDates($input);
-        if(!$matchDate){
-            return back()->with('error','Match dates does not matching with Start and End dates of Series');
+        $matchData = $this->matchRepository->checkData($input);
+        if(!$matchData['flag']){
+            return back()->with('error',$matchData['message']);
         }
 
         $match = $this->matchRepository->create($input);
@@ -133,7 +133,11 @@ class MatchController extends AppBaseController
 
             return redirect(route('matches.index'));
         }
-
+        $matchData = $this->matchRepository->checkData($request->all());
+        if(!$matchData['flag']){
+            return back()->with('error',$matchData['message']);
+        }
+        
         $match = $this->matchRepository->update($request->all(), $id);
 
         Flash::success('Match updated successfully.');

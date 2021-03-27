@@ -25,6 +25,7 @@ class CreateMatchRequest extends FormRequest
      */
     public function rules()
     {
-        return Match::$rules;
+        $rules = Match::$rules;
+        return $rules; 
     }
 }

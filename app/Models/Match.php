@@ -66,8 +66,10 @@ class Match extends Model
     public static $rules = [
         'name' => 'required',
         'series_id' => 'required',
-        'team1' => 'required|unique:matches,team2',
-        'team2' => 'required|unique:matches,team1',
+        'team1' => 'required',
+        'team2' => 'required',
+        //'team1' => 'required|unique:matches,team2',
+        //'team2' => 'required|unique:matches,team1',
         'date' => 'required|unique:matches|after:today'
     ];
 

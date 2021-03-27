@@ -57,17 +57,28 @@ class MatchRepository extends BaseRepository
     }
 
     //Check match date with Series start date and end date
-    public function checkSeriesDates($match_data)
+    public function checkData($match_data)
     {
-        $seriesDates = Series::find($match_data['series_id'], ['start_date', 'end_date']);
-        
-        $matchDate = date('Y-m-d', strtotime($match_data['date']));   
-        $startDate = date('Y-m-d', strtotime($seriesDates->start_date));
-        $endDate = date('Y-m-d', strtotime($seriesDates->end_date));
-        
-        if(($matchDate >= $startDate) && ($matchDate <= $endDate)){   
-            return true;
+        $returnMsg = [];
+
+        if($match_data['team1'] != $match_data['team2']){
+            $seriesDates = Series::find($match_data['series_id'], ['start_date', 'end_date']);
+            
+            $matchDate = date('Y-m-d', strtotime($match_data['date']));   
+            $startDate = date('Y-m-d', strtotime($seriesDates->start_date));
+            $endDate = date('Y-m-d', strtotime($seriesDates->end_date));
+            
+            if(($matchDate >= $startDate) && ($matchDate <= $endDate)){   
+                $returnMsg['flag'] = true;
+                return $returnMsg;
+            }
+            $returnMsg['flag'] = false;
+            $returnMsg['message'] = 'Match date should be between Series start date and end date';
+        } else {
+            $returnMsg['flag'] = false;
+            $returnMsg['message'] = 'Team1 and Team2 should be different';
         }
-        return false;
+        
+        return $returnMsg;
     }
 }

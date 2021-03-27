@@ -26,7 +26,8 @@ class UpdateMatchRequest extends FormRequest
     public function rules()
     {
         $rules = Match::$rules;
-        
+        $rules['date'] = 'required|after:today';
+                
         return $rules;
     }
 }
