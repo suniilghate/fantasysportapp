@@ -44,4 +44,20 @@ class ContestRepository extends BaseRepository
     {
         return Contest::class;
     }
+
+    //Check contest type and entry fee
+    public function checkData($contest_data)
+    {
+        $returnMsg = [];
+        $returnMsg['flag'] = true;
+
+        if($contest_data['contest_type'] == 2 && ($contest_data['entry_fee'] > 0 || $contest_data['total_amount'] > 0)){
+                $returnMsg['flag'] = false;
+                $returnMsg['message'] = 'No Entry fee is applicable for this contest since this is a Free Contest';
+                
+                return $returnMsg;
+        } 
+        
+        return $returnMsg;
+    }
 }

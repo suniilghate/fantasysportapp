@@ -60,6 +60,10 @@ class ContestController extends AppBaseController
     public function store(CreateContestRequest $request)
     {
         $input = $request->all();
+        $contestData = $this->contestRepository->checkData($input);
+        if(!$contestData['flag']){
+            return back()->with('error',$contestData['message']);
+        }
 
         $contest = $this->contestRepository->create($input);
 
@@ -104,8 +108,10 @@ class ContestController extends AppBaseController
 
             return redirect(route('contests.index'));
         }
+        $match = Match::pluck('name','id')->all(); //match_id
+        $contesttype = ContestType::pluck('name','id')->all(); //contest_type
 
-        return view('contests.edit')->with('contest', $contest);
+        return view('contests.edit', compact('contest','match','contesttype'));
     }
 
     /**
@@ -125,7 +131,10 @@ class ContestController extends AppBaseController
 
             return redirect(route('contests.index'));
         }
-
+        $contestData = $this->contestRepository->checkData($request->all());
+        if(!$contestData['flag']){
+            return back()->with('error',$contestData['message']);
+        }
         $contest = $this->contestRepository->update($request->all(), $id);
 
         Flash::success('Contest updated successfully.');
