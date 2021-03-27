@@ -19,7 +19,7 @@ class CreatePlayersTable extends Migration
             $table->string('name');
             $table->integer('sport_id');
             $table->integer('age');
-            $table->tinyinteger('gender');
+            $table->tinyinteger('gender_id');
             $table->tinyinteger('type');
             $table->tinyinteger('status')->default(1);
             $table->timestamps();
