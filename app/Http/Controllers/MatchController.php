@@ -81,7 +81,8 @@ class MatchController extends AppBaseController
      */
     public function show($id)
     {
-        $match = $this->matchRepository->find($id);
+        $match = $this->matchRepository->getAll($id);
+        
         if (empty($match)) {
             Flash::error('Match not found');
             return redirect(route('matches.index'));

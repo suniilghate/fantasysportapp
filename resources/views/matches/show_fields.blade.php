@@ -7,19 +7,19 @@
 <!-- Series Id Field -->
 <div class="form-group">
     {!! Form::label('series_id', 'Series Id:') !!}
-    <p>{{ $match->series_id }}</p>
+    <p>{{ $match->series->name }}</p>
 </div>
 
 <!-- Team1 Field -->
 <div class="form-group">
     {!! Form::label('team1', 'Team1:') !!}
-    <p>{{ $match->team1 }}</p>
+    <p>{{ $match->team1name }}</p>
 </div>
 
 <!-- Team2 Field -->
 <div class="form-group">
     {!! Form::label('team2', 'Team2:') !!}
-    <p>{{ $match->team2 }}</p>
+    <p>{{ $match->team2name }}</p>
 </div>
 
 <!-- Date Field -->

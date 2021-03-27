@@ -47,12 +47,16 @@ class MatchRepository extends BaseRepository
     }
 
     //Fetch team1 and team2 names
-    public function getAll()
+    public function getAll($id = null)
     {
         $matches = Match::join('teams as T1', 'matches.team1', '=', 'T1.id')
                         ->join('teams as T2', 'matches.team2', '=', 'T2.id')
-                        ->select('matches.*', 'T1.name as team1name','T2.name as team2name')
-                        ->get();
+                        ->select('matches.*', 'T1.name as team1name','T2.name as team2name');
+        if(is_null($id)){
+            $matches = $matches->get();
+        } else{
+            $matches = $matches->where('matches.id','=',$id)->get()->first();
+        }                        
         return $matches;
     }
 

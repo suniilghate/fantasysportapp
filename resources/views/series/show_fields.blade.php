@@ -7,7 +7,7 @@
 <!-- Sport Id Field -->
 <div class="form-group">
     {!! Form::label('sport_id', 'Sport Id:') !!}
-    <p>{{ $series->sport_id }}</p>
+    <p>{{ $series->sports->name }}</p>
 </div>
 
 <!-- Start Date Field -->
