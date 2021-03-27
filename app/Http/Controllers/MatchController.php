@@ -60,6 +60,12 @@ class MatchController extends AppBaseController
     public function store(CreateMatchRequest $request)
     {
         $input = $request->all();
+
+        $matchDate = $this->matchRepository->checkSeriesDates($input);
+        if(!$matchDate){
+            return back()->with('error','Match dates does not matching with Start and End dates of Series');
+        }
+
         $match = $this->matchRepository->create($input);
         Flash::success('Match saved successfully.');
 

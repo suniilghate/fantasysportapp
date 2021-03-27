@@ -12,6 +12,12 @@
         </div>
         <div class="content">
             @include('stisla-templates::common.errors')
+            @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                    <strong>{{ $message }}</strong>
+            </div>
+            @endif
             <div class="section-body">
                <div class="row">
                    <div class="col-lg-12">

@@ -3,7 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\Match;
+use App\Models\Series;
 use App\Repositories\BaseRepository;
+use Carbon\Carbon;
 
 /**
  * Class MatchRepository
@@ -44,11 +46,7 @@ class MatchRepository extends BaseRepository
         return Match::class;
     }
 
-    /**
-     * Return searchable fields
-     *
-     * @return array
-     */
+    //Fetch team1 and team2 names
     public function getAll()
     {
         $matches = Match::join('teams as T1', 'matches.team1', '=', 'T1.id')
@@ -56,5 +54,20 @@ class MatchRepository extends BaseRepository
                         ->select('matches.*', 'T1.name as team1name','T2.name as team2name')
                         ->get();
         return $matches;
+    }
+
+    //Check match date with Series start date and end date
+    public function checkSeriesDates($match_data)
+    {
+        $seriesDates = Series::find($match_data['series_id'], ['start_date', 'end_date']);
+        
+        $matchDate = date('Y-m-d', strtotime($match_data['date']));   
+        $startDate = date('Y-m-d', strtotime($seriesDates->start_date));
+        $endDate = date('Y-m-d', strtotime($seriesDates->end_date));
+        
+        if(($matchDate >= $startDate) && ($matchDate <= $endDate)){   
+            return true;
+        }
+        return false;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Series;
 
 /**
  * Class Match
@@ -65,9 +66,9 @@ class Match extends Model
     public static $rules = [
         'name' => 'required',
         'series_id' => 'required',
-        'team1' => 'required',
+        'team1' => 'required|unique:matches,team2',
         'team2' => 'required|unique:matches,team1',
-        'date' => 'required|unique:matches'
+        'date' => 'required|unique:matches|after:today'
     ];
 
     /**
