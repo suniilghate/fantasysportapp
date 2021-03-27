@@ -8,6 +8,7 @@ use App\Repositories\TeamRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use App\Models\Sports;
+use App\Models\Players;
 use Flash;
 use Response;
 
@@ -62,6 +63,38 @@ class TeamController extends AppBaseController
         Flash::success('Team saved successfully.');
 
         return redirect(route('teams.index'));
+    }
+
+    /**
+     * Store a newly created Team in storage.
+     *
+     * @param CreateTeamRequest $request
+     *
+     * @return Response
+     */
+    public function store_team_players(Request $request)
+    {
+        $input = $request->all();
+        $team = $this->teamRepository->find($input['team_id']);
+        $teamPlayers = $team->Players()->attach($input['player_id']);
+        
+        Flash::success('Team Players saved successfully.');
+
+        return redirect(route('teams.index'));
+    }
+    
+
+    /**
+     * Store a newly created Team in storage.
+     *
+     * @param CreateTeamRequest $request
+     *
+     * @return Response
+     */
+    public function add_team_players($id)
+    {
+        $players = Players::pluck('name','id')->all(); //Players Id
+        return view('teams.addplayers', compact('players','id'));
     }
 
     /**

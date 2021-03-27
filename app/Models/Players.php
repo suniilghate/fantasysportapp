@@ -97,4 +97,12 @@ class Players extends Model
     {
         return $this->belongsTo(PlayerType::class, 'type');
     }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+    **/
+    public function Teams()
+    {
+        return $this->belongsToMany(Team::class);
+    }
 }

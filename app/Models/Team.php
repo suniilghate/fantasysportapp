@@ -69,6 +69,12 @@ class Team extends Model
         return $this->belongsTo(Sports::class, 'sport_id');
     }
 
-
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+    **/
+    public function Players()
+    {
+        return $this->belongsToMany(Players::class);
+    }
     
 }
