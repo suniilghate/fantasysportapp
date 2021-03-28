@@ -63,7 +63,7 @@ class MatchController extends AppBaseController
 
         $matchData = $this->matchRepository->checkData($input);
         if(!$matchData['flag']){
-            return back()->with('error',$matchData['message']);
+            return back()->withInput()->with('error',$matchData['message']);
         }
 
         $match = $this->matchRepository->create($input);
@@ -136,7 +136,7 @@ class MatchController extends AppBaseController
         }
         $matchData = $this->matchRepository->checkData($request->all());
         if(!$matchData['flag']){
-            return back()->with('error',$matchData['message']);
+            return back()->withInput()->with('error',$matchData['message']);
         }
         
         $match = $this->matchRepository->update($request->all(), $id);

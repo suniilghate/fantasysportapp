@@ -62,7 +62,7 @@ class ContestController extends AppBaseController
         $input = $request->all();
         $contestData = $this->contestRepository->checkData($input);
         if(!$contestData['flag']){
-            return back()->with('error',$contestData['message']);
+            return back()->withInput()->with('error',$contestData['message']);
         }
 
         $contest = $this->contestRepository->create($input);
@@ -133,7 +133,7 @@ class ContestController extends AppBaseController
         }
         $contestData = $this->contestRepository->checkData($request->all());
         if(!$contestData['flag']){
-            return back()->with('error',$contestData['message']);
+            return back()->withInput()->with('error',$contestData['message']);
         }
         $contest = $this->contestRepository->update($request->all(), $id);
 
