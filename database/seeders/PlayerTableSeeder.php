@@ -69,7 +69,7 @@ class PlayerTableSeeder extends Seeder
             ['name' => 'Shikar Dhawan','sport_id' => 1,'age' => 30,'gender_id' => 1,'type' => 1,'status' => 1],
             ['name' => 'Shimron Hetmyer','sport_id' => 1,'age' => 38,'gender_id' => 1,'type' => 1,'status' => 1],
             ['name' => 'Prithvi Shaw','sport_id' => 1,'age' => 38,'gender_id' => 1,'type' => 1,'status' => 1],
-            ['name' => 'Marcus Stonis','sport_id' => 1,'age' => 30,'gender_id' => 1,'type' => 2,'status' => 1],
+            ['name' => 'Marcus Stoinis','sport_id' => 1,'age' => 30,'gender_id' => 1,'type' => 2,'status' => 1],
             ['name' => 'Lalit Yadav','sport_id' => 1,'age' => 30,'gender_id' => 1,'type' => 2,'status' => 1],
             ['name' => 'Ravichandra Ashwin','sport_id' => 1,'age' => 30,'gender_id' => 1,'type' => 2,'status' => 1],
             ['name' => 'Axar Patel','sport_id' => 1,'age' => 30,'gender_id' => 1,'type' => 2,'status' => 1],
