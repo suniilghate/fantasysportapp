@@ -52,7 +52,7 @@ class PlayerTableSeeder extends Seeder
             ['name' => 'Piyush Chawla','sport_id' => 1,'age' => 30,'gender_id' => 1,'type' => 2,'status' => 1],
             ['name' => 'Michell Shantar','sport_id' => 1,'age' => 30,'gender_id' => 1,'type' => 2,'status' => 1],
             ['name' => 'Monu Kumar','sport_id' => 1,'age' => 30,'gender_id' => 1,'type' => 2,'status' => 1],
-            ['name' => 'Sam Curan','sport_id' => 1,'age' => 30,'gender_id' => 1,'type' => 2,'status' => 1],
+            ['name' => 'Sam Curran','sport_id' => 1,'age' => 30,'gender_id' => 1,'type' => 2,'status' => 1],
             ['name' => 'Mahendra Sing Dhoni','sport_id' => 1,'age' => 30,'gender_id' => 1,'type' => 3,'status' => 1],
             ['name' => 'N Jagadessan','sport_id' => 1,'age' => 30,'gender_id' => 1,'type' => 3,'status' => 1],
             ['name' => 'Shardul Thakur','sport_id' => 1,'age' => 30,'gender_id' => 1,'type' => 4,'status' => 1],
