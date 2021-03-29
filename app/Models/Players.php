@@ -66,14 +66,7 @@ class Players extends Model
         'type' => 'required'
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\hasOne
-     **/
-    /*public function gender()
-    {
-        return $this->hasOne(\App\Models\Gender::class);
-    }*/
-
+    
     /**
     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
     **/

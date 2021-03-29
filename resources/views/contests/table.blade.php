@@ -23,7 +23,7 @@
                 <td>{{ $contest->entry_fee }}</td>
                 <td>{{ $contest->total_amount }}</td>
                 <td>{{ $contest->contest_total_users }}</td>
-                <td>{{ $contest->status }}</td>
+                <td>{{ Config::get('fsa.status.contest')[$contest->status] }}</td>
                 <td class=" text-center">
                     {!! Form::open(['route' => ['contests.destroy', $contest->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

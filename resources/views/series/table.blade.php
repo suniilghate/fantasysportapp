@@ -11,13 +11,14 @@
             </tr>
         </thead>
         <tbody>
+        
         @foreach($series as $s)
             <tr>
                 <td>{{ $s->name }}</td>
                 <td>{{ $s->sports->name }}</td>
                 <td>{{ $s->start_date }}</td>
                 <td>{{ $s->end_date }}</td>
-                <td>{{ $s->status }}</td>
+                <td>{{ Config::get('fsa.status.series')[$s->status] }}</td>
                 <td class=" text-center">
                     {!! Form::open(['route' => ['series.destroy', $s->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

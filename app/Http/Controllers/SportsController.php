@@ -8,6 +8,7 @@ use App\Repositories\SportsRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Config;
 use Response;
 
 class SportsController extends AppBaseController
@@ -94,7 +95,11 @@ class SportsController extends AppBaseController
     public function edit($id)
     {
         $sports = $this->sportsRepository->find($id);
-
+        
+        if(Config::get('fsa.status.sports')[$sports->status] != 'Active'){
+            return redirect()->back()->with('error', 'Cannot edit the Sport. Matches are opened or in progress.'); 
+        }
+        
         if (empty($sports)) {
             Flash::error('Sports not found');
 
@@ -141,6 +146,9 @@ class SportsController extends AppBaseController
     public function destroy($id)
     {
         $sports = $this->sportsRepository->find($id);
+        if(Config::get('fsa.status.sports')[$sports->status] != 'Active'){
+            return redirect()->back()->with('error', 'Cannot edit the Sport. Matches are opened or in progress.'); 
+        }
 
         if (empty($sports)) {
             Flash::error('Sports not found');

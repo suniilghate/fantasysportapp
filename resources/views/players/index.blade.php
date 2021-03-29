@@ -10,6 +10,13 @@
                 <a href="{{ route('players.create')}}" class="btn btn-primary form-btn">Players <i class="fas fa-plus"></i></a>
             </div>
         </div>
+        @if (\Session::has('error'))
+            <div class="alert alert-danger">
+                <ul>
+                    <li>{!! \Session::get('error') !!}</li>
+                </ul>
+            </div>
+        @endif    
     <div class="section-body">
        <div class="card">
             <div class="card-body">

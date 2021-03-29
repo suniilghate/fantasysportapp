@@ -19,7 +19,7 @@
                 <td>{{ $player->age }}</td>
                 <td>{{ $player->gender->name }}</td>
                 <td>{{ $player->playertype->name }}</td>
-                <td>{{ $player->status }}</td>
+                <td>{{ Config::get('fsa.status.players')[$player->status] }}</td>
                 <td class=" text-center">
                     {!! Form::open(['route' => ['players.destroy', $player->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

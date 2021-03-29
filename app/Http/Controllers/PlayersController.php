@@ -12,6 +12,7 @@ use App\Models\Gender;
 use App\Models\PlayerType;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Config;
 use Response;
 
 class PlayersController extends AppBaseController
@@ -97,7 +98,13 @@ class PlayersController extends AppBaseController
      */
     public function edit($id)
     {
+        
         $players = $this->playersRepository->find($id);
+
+        if(Config::get('fsa.status.players')[$players->status] != 'Active'){
+            return redirect()->back()->with('error', 'Cannot edit the Players. Matches are opened or in progress.'); 
+        }
+
         if (empty($players)) {
             Flash::error('Players not found');
             return redirect(route('players.index'));
@@ -146,6 +153,10 @@ class PlayersController extends AppBaseController
     public function destroy($id)
     {
         $players = $this->playersRepository->find($id);
+        if(Config::get('fsa.status.players')[$players->status] != 'Active'){
+            return redirect()->back()->with('error', 'Cannot edit the Team. Matches are opened or in progress.'); 
+        }
+
         if (empty($players)) {
             Flash::error('Players not found');
             return redirect(route('players.index'));

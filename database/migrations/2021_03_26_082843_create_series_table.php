@@ -20,7 +20,7 @@ class CreateSeriesTable extends Migration
             $table->integer('sport_id');
             $table->date('start_date');
             $table->date('end_date');
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->default(1)->comment('1:Active | 2:Pools Opened | 3:Match-Inplay | 4:Match finish | 5: Series Cancelled | 6: Series Over | 7:Deactive');
             $table->timestamps();
             $table->softDeletes();
         });

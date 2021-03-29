@@ -23,7 +23,7 @@ class CreateContestsTable extends Migration
             $table->float('entry_fee');
             $table->float('total_amount');
             $table->integer('contest_total_users');
-            $table->tinyinteger('status')->default(1);
+            $table->tinyinteger('status')->default(1)->comment('1:Active | 2:Pools Opened | 3:Match-Inplay | 4:Ist Inning finish | 5:IInd Inning finish | 6: Calculation In-progress | 7: Pools Closed | 8:Deactive');
             $table->timestamps();
             $table->softDeletes();
         });

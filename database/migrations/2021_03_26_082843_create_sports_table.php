@@ -18,7 +18,7 @@ class CreateSportsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->default(1)->comment('1:Active | 2:Pools Opened | 3:Match-Inplay | 4:Deactive');
             $table->timestamps();
             $table->softDeletes();
         });

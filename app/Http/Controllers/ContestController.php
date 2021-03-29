@@ -11,6 +11,7 @@ use App\Models\Match;
 use App\Models\ContestType;
 use Flash;
 use Response;
+use Illuminate\Support\Facades\Config;
 
 class ContestController extends AppBaseController
 {
@@ -103,6 +104,10 @@ class ContestController extends AppBaseController
     public function edit($id)
     {
         $contest = $this->contestRepository->find($id);
+        
+        if(Config::get('fsa.status.contest')[$contest->status] != 'Active'){
+            return redirect()->back()->with('error', 'Cannot edit the Contest. Matches are opened or in progress.'); 
+        }
 
         if (empty($contest)) {
             Flash::error('Contest not found');
@@ -155,6 +160,10 @@ class ContestController extends AppBaseController
     public function destroy($id)
     {
         $contest = $this->contestRepository->find($id);
+        
+        if(Config::get('fsa.status.contest')[$contest->status] != 'Active'){
+            return redirect()->back()->with('error', 'Cannot edit the Contest. Matches are opened or in progress.'); 
+        }
 
         if (empty($contest)) {
             Flash::error('Contest not found');

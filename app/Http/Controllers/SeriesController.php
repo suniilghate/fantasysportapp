@@ -9,6 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use App\Models\Sports;
 use Flash;
+use Illuminate\Support\Facades\Config;
 use Response;
 
 class SeriesController extends AppBaseController
@@ -93,6 +94,10 @@ class SeriesController extends AppBaseController
     public function edit($id)
     {
         $series = $this->seriesRepository->find($id);
+        if(Config::get('fsa.status.series')[$series->status] != 'Active'){
+            return redirect()->back()->with('error', 'Cannot edit the Series. Matches are opened or in progress.'); 
+        }
+        
         if (empty($series)) {
             Flash::error('Series not found');
             return redirect(route('series.index'));
@@ -138,6 +143,10 @@ class SeriesController extends AppBaseController
     public function destroy($id)
     {
         $series = $this->seriesRepository->find($id);
+        if(Config::get('fsa.status.series')[$series->status] != 'Active'){
+            return redirect()->back()->with('error', 'Cannot edit the Series. Matches are opened or in progress.'); 
+        }
+        
         if (empty($series)) {
             Flash::error('Series not found');
             return redirect(route('series.index'));

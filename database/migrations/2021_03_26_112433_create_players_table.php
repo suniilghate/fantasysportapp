@@ -21,7 +21,7 @@ class CreatePlayersTable extends Migration
             $table->integer('age');
             $table->tinyinteger('gender_id');
             $table->tinyinteger('type');
-            $table->tinyinteger('status')->default(1);
+            $table->tinyinteger('status')->default(1)->comment('1:Active | 2:Series declared | 3:Playing 11 | 4:Substitute | 5:Retired | 6:Deactive');
             $table->timestamps();
             $table->softDeletes();
         });

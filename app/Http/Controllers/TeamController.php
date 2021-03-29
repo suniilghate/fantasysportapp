@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Sports;
 use App\Models\Players;
 use Flash;
+use Illuminate\Support\Facades\Config;
 use Response;
 
 class TeamController extends AppBaseController
@@ -126,6 +127,11 @@ class TeamController extends AppBaseController
     public function edit($id)
     {
         $team = $this->teamRepository->find($id);
+
+        if(Config::get('fsa.status.teams')[$team->status] != 'Active'){
+            return redirect()->back()->with('error', 'Cannot edit the Team. Matches are opened or in progress.'); 
+        }
+
         if (empty($team)) {
             Flash::error('Team not found');
             return redirect(route('teams.index'));
@@ -169,6 +175,12 @@ class TeamController extends AppBaseController
     public function destroy($id)
     {
         $team = $this->teamRepository->find($id);
+        $team = $this->teamRepository->find($id);
+
+        if(Config::get('fsa.status.teams')[$team->status] != 'Active'){
+            return redirect()->back()->with('error', 'Cannot edit the Team. Matches are opened or in progress.'); 
+        }
+
         if (empty($team)) {
             Flash::error('Team not found');
             return redirect(route('teams.index'));

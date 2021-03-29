@@ -8,8 +8,11 @@ use App\Repositories\MatchRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use App\Models\Series;
+use App\Models\Sports;
 use App\Models\Team;
 use Flash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 use Response;
 
 class MatchController extends AppBaseController
@@ -91,6 +94,44 @@ class MatchController extends AppBaseController
         return view('matches.show')->with('match', $match);
     }
 
+    public function open_match($matchId) {
+        //update the match status| pool status | series status | sports status | team status | players status
+        $matchObj = $this->matchRepository->getAll($matchId);
+        try {
+            // Begin a transaction
+            DB::beginTransaction();
+            //update sports status
+            $matchObj->Series->Sports()->update(['status' => 2]);
+            
+            //update series status
+            $matchObj->Series->update(['status' => 2]);
+
+            //update match status
+            $matchObj->update(['status' => 2]);
+
+            //update contests status
+            $matchObj->Contests()->update(['status' => 2]);
+
+            //update team status
+            Team::where('id', $matchObj->team1)->update(['status' => 2]);    
+            Team::where('id', $matchObj->team2)->update(['status' => 2]);
+
+            Team::find($matchObj->team1)->Players()->update(['status' => 2]);
+            Team::find($matchObj->team2)->Players()->update(['status' => 2]);
+
+            // Commit the transaction
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Match opened.'); 
+        } catch (\Exception $e) {
+            // An error occured; cancel the transaction...
+            DB::rollback();
+            // and throw the error again.
+            //throw $e;
+            return redirect()->back()->with('error', 'Cannot opened matches.' . $e); 
+        }
+    }
+
     /**
      * Show the form for editing the specified Match.
      *
@@ -101,6 +142,10 @@ class MatchController extends AppBaseController
     public function edit($id)
     {
         $match = $this->matchRepository->find($id);
+        if(Config::get('fsa.status.matches')[$match->status] != 'Active'){
+            return redirect()->back()->with('error', 'Cannot edit the Match. Matches are opened or in progress.'); 
+        }
+
         if (empty($match)) {
             Flash::error('Match not found');
             return redirect(route('matches.index'));
@@ -158,6 +203,9 @@ class MatchController extends AppBaseController
     public function destroy($id)
     {
         $match = $this->matchRepository->find($id);
+        if(Config::get('fsa.status.matches')[$match->status] != 'Active'){
+            return redirect()->back()->with('error', 'Cannot edit the Match. Matches are opened or in progress.'); 
+        }
 
         if (empty($match)) {
             Flash::error('Match not found');

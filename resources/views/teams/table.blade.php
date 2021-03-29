@@ -17,7 +17,7 @@
                 <td>{{ $team->description }}</td>
                 <td>{{ $team->sports->name }}</td>
                 <td>{{ $team->country }}</td>
-                <td>{{ $team->status }}</td>
+                <td>{{ Config::get('fsa.status.teams')[$team->status] }}</td>
                 <td class=" text-center">
                     {!! Form::open(['route' => ['teams.destroy', $team->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

@@ -20,12 +20,16 @@
                 <td>{{ $match->team1name }}</td>
                 <td>{{ $match->team2name }}</td>
                 <td>{{ $match->date }}</td>
-                <td>{{ $match->status }}</td>
+                <td>{{ Config::get('fsa.status.matches')[$match->status] }}</td>
+                
                 <td>{{ $match->result }}</td>
                 <td class=" text-center">
                     {!! Form::open(['route' => ['matches.destroy', $match->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
                         <a href="{!! route('matches.show', [$match->id]) !!}" class='btn btn-light action-btn '><i class="fa fa-eye"></i></a>
+                        @if(Config::get('fsa.status.matches')[$match->status] == 'Active')
+                        <a href="{!! route('matches.open', [$match->id]) !!}" class='btn btn-warning action-btn'><i class="fa fa-calendar"></i></a>
+                        @endif
                         <a href="{!! route('matches.edit', [$match->id]) !!}" class='btn btn-warning action-btn edit-btn'><i class="fa fa-edit"></i></a>
                         {!! Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger action-btn delete-btn', 'onclick' => 'return confirm("Are you sure want to delete this record ?")']) !!}
                     </div>

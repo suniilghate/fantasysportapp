@@ -20,7 +20,7 @@ class CreateTeamsTable extends Migration
             $table->text('description');
             $table->integer('sport_id');
             $table->string('country');
-            $table->tinyinteger('status')->default(1);
+            $table->tinyinteger('status')->default(1)->comment('1:Active | 2:Series declared | 3:Match-Inplay | 4:Deactive');
             $table->timestamps();
             $table->softDeletes();
         });
