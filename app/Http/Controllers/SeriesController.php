@@ -30,7 +30,8 @@ class SeriesController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $series = $this->seriesRepository->all();
+        $perPage = (env('PAGINATION_ROWS')) ? env('PAGINATION_ROWS') : 10;    
+        $series = $this->seriesRepository->paginate($perPage);
         
         return view('series.index')
             ->with('series', $series);

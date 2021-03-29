@@ -32,7 +32,7 @@ class MatchController extends AppBaseController
     public function index(Request $request)
     {
         $matches = $this->matchRepository->getAll();
-        
+        //dd($matches);
         return view('matches.index')
             ->with('matches', $matches);
     }

@@ -31,7 +31,8 @@ class ContestController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $contests = $this->contestRepository->all();
+        $perPage = (env('PAGINATION_ROWS')) ? env('PAGINATION_ROWS') : 20;
+        $contests = $this->contestRepository->paginate($perPage);
 
         return view('contests.index')
             ->with('contests', $contests);

@@ -35,4 +35,6 @@
         @endforeach
         </tbody>
     </table>
+    {{-- Pagination --}}
+    {!! $matches->links() !!}
 </div>

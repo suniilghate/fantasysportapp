@@ -31,4 +31,6 @@
         @endforeach
         </tbody>
     </table>
+    {{-- Pagination --}}
+    {!! $series->links() !!}
 </div>

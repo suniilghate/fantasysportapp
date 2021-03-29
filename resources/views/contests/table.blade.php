@@ -37,4 +37,6 @@
         @endforeach
         </tbody>
     </table>
+    {{-- Pagination --}}
+    {!! $contests->links() !!}
 </div>

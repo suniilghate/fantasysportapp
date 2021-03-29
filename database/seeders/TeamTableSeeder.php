@@ -18,14 +18,56 @@ class TeamTableSeeder extends Seeder
         $teamsArr = [
             [
                 'name' => 'Mumbai Indians',
-                'description' => 'Mumbai Indians',
+                'description' => 'MI',
                 'sport_id' => 1,
                 'country' => 'India',
                 'status' => 1
             ],
             [
                 'name' => 'Chenai Superkings',
-                'description' => 'Chenai Superkings',
+                'description' => 'CSK',
+                'sport_id' => 1,
+                'country' => 'India',
+                'status' => 1
+            ],
+            [
+                'name' => 'Royal Challengers Banglore',
+                'description' => 'RCB',
+                'sport_id' => 1,
+                'country' => 'India',
+                'status' => 1
+            ],
+            [
+                'name' => 'Delhi Capitals',
+                'description' => 'DC',
+                'sport_id' => 1,
+                'country' => 'India',
+                'status' => 1
+            ],
+            [
+                'name' => 'Sunrisers Hyderabad',
+                'description' => 'SRH',
+                'sport_id' => 1,
+                'country' => 'India',
+                'status' => 1
+            ],
+            [
+                'name' => 'Kolkatta Knight Riders',
+                'description' => 'KKR',
+                'sport_id' => 1,
+                'country' => 'India',
+                'status' => 1
+            ],
+            [
+                'name' => 'Rajasthan Royals',
+                'description' => 'RR',
+                'sport_id' => 1,
+                'country' => 'India',
+                'status' => 1
+            ],
+            [
+                'name' => 'Punjab Kings XL',
+                'description' => 'PBKS',
                 'sport_id' => 1,
                 'country' => 'India',
                 'status' => 1

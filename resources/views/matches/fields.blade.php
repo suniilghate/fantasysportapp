@@ -37,7 +37,7 @@
     @php
         $val = isset($date) ? $date : null;
     @endphp
-    {!! Form::date('date', $val, ['class' => 'form-control','id'=>'date']) !!}
+    {!! Form::datetimeLocal('date', $val, ['class' => 'form-control','id'=>'date']) !!}
 </div>
 
 @push('scripts')

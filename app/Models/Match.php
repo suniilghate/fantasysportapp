@@ -55,7 +55,7 @@ class Match extends Model
         'series_id' => 'integer',
         'team1' => 'integer',
         'team2' => 'integer',
-        'date' => 'date'
+        'date' => 'datetime'
     ];
 
     /**

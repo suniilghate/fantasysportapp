@@ -31,7 +31,8 @@ class TeamController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $teams = $this->teamRepository->all();
+        $perPage = (env('PAGINATION_ROWS')) ? env('PAGINATION_ROWS') : 20;
+        $teams = $this->teamRepository->paginate($perPage);
 
         return view('teams.index')
             ->with('teams', $teams);

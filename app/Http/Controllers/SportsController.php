@@ -29,7 +29,8 @@ class SportsController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $sports = $this->sportsRepository->all();
+        $perPage = (env('PAGINATION_ROWS')) ? env('PAGINATION_ROWS') : 10;    
+        $sports = $this->sportsRepository->paginate($perPage);
 
         return view('sports.index')
             ->with('sports', $sports);

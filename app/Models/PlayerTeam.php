@@ -11,6 +11,8 @@ class PlayerTeam extends Model
 {
     use HasFactory;
 
+    public $table = 'players_team';
+
     /**
      * The attributes that are mass assignable.
      *

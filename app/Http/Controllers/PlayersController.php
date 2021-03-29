@@ -33,8 +33,9 @@ class PlayersController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $players = $this->playersRepository->all();
-        
+        $perPage = (env('PAGINATION_ROWS')) ? env('PAGINATION_ROWS') : 20;
+        $players = $this->playersRepository->paginate($perPage);
+        //dd($players);
         return view('players.index')
                 ->with('players', $players);
     }

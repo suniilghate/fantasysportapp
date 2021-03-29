@@ -34,3 +34,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('teams/fetchteamplayers/{id}', [App\Http\Controllers\TeamController::class, 'fetch_team_players'])->name('teams.fetchteamplayers');
     Route::resource('players', App\Http\Controllers\PlayersController::class);
 });
+
+Route::group(['prefix' => 'fsa', 'middleware' => ['auth']], function() {
+    //Route::get('/', App\Http\Controllers\FSAController::class);
+});

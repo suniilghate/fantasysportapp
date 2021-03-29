@@ -45,8 +45,8 @@ class Series extends Model
         'id' => 'integer',
         'name' => 'string',
         'sport_id' => 'integer',
-        'start_date' => 'date',
-        'end_date' => 'date'
+        'start_date' => 'datetime',
+        'end_date' => 'datetime'
     ];
 
     /**
