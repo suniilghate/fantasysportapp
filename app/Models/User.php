@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -43,4 +44,52 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+    **/
+    /*public function UserWallet()
+    {
+        return $this->belongsTo(UserWallet::class, 'user_id');
+    }*/
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\hasMany
+    **/
+    public function UserWallets()
+    {
+        return $this->hasMany(UserWallet::class, 'user_id');
+    }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+    **/
+    public function UserTransaction()
+    {
+        return $this->belongsTo(UserTransaction::class, 'user_id');
+    }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+    **/
+    public function UserCombination()
+    {
+        return $this->belongsTo(UserCombination::class, 'user_id');
+    }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+    **/
+    public function UserContest()
+    {
+        return $this->belongsTo(UserContest::class, 'user_id');
+    }
+
+    public function latestbalance(){
+        return $balance = Auth::user()->UserWallets()->select(['current_balance','bonus_amount', 'deposit_amount', 'previous_balance', 'wining_amount'])->orderBy('id', 'DESC')->get()->first();
+    }
+
+    
+
+    
 }

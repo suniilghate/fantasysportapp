@@ -23,6 +23,9 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', App\Http\Controllers\UserController::class);
+
+    Route::post('users/addcash/{id}', [App\Http\Controllers\UserController::class, 'add_cash'])->name('users.addcash');
+    
     Route::resource('sports', App\Http\Controllers\SportsController::class);
     Route::resource('series', App\Http\Controllers\SeriesController::class);
     Route::resource('matches', App\Http\Controllers\MatchController::class);
@@ -35,6 +38,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('players', App\Http\Controllers\PlayersController::class);
 
     Route::get('matches/open/{id}', [App\Http\Controllers\MatchController::class, 'open_match'])->name('matches.open');
+
+    Route::post('users/recordtransaction/{id}', [App\Http\Controllers\UserController::class, 'save_transaction'])->name('users.recordtransaction');
+        
+    // Get Route For Show Payment Form
+    //Route::get('paywithrazorpay', [App\Http\Controllers\RazorpayController::class, 'payWithRazorpay'])->name('paywithrazorpay');
+
+    // Post Route For Make Payment Request
+    //Route::post('payment', [App\Http\Controllers\RazorpayController::class, 'payment'])->name('payment');
 });
 
 Route::group(['prefix' => 'fsa', 'middleware' => ['auth']], function() {

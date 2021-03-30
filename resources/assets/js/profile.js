@@ -5,6 +5,13 @@ $(document).on('click', '.edit-profile', function (event) {
     $('#EditProfileModal').appendTo('body').modal('show');
 });
 
+$(document).on('click', '.my-wallet', function (event) {
+    $('#walletTdCB').html(loggedInUserBalance.current_balance);
+    $('#walletTdBA').html(loggedInUserBalance.bonus_amount);
+    $('#walletTdDA').html(loggedInUserBalance.deposit_amount);
+    $('#UserWalletModal').appendTo('body').modal('show');
+});
+
 $(document).on('change', '#pfImage', function () {
     let ext = $(this).val().split('.').pop().toLowerCase();
     if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
@@ -36,6 +43,35 @@ window.displayPhoto = function (input, selector) {
         }
     }
 }
+
+$(document).on('submit', '#addCashWalletForm', function (event) {
+    event.preventDefault();
+    let userId = $('#editProfileUserId').val();
+    var loadingButton = jQuery(this).find('#btnPrEditSave');
+    alert(appUrl);
+    alert(appUrl + 'users/addcash/' + userId);
+    $.ajax({
+        url: appUrl + 'users/addcash/' + userId,
+        type: 'post',
+        data: new FormData($(this)[0]),
+        processData: false,
+        contentType: false,
+        success: function success(result) {
+            if (result.success) {
+                $('#UserWalletModal').modal('hide');
+                setTimeout(function () {
+                    location.reload();
+                }, 1500);
+            }
+        },
+        error: function error(result) {
+            console.log(result);
+        },
+        complete: function complete() {
+            loadingButton.button('reset');
+        }
+    });
+});
 
 $(document).on('submit', '#editProfileForm', function (event) {
     event.preventDefault();

@@ -47,6 +47,7 @@
 
 @include('profile.change_password')
 @include('profile.edit_profile')
+@include('profile.my_wallet')
 
 </body>
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
@@ -66,7 +67,10 @@
 @yield('scripts')
 <script>
     let loggedInUser =@json(\Illuminate\Support\Facades\Auth::user());
+    let loggedInUserBalance =@json(\Illuminate\Support\Facades\Auth::user()->latestbalance());
+    console.log(loggedInUserBalance);
     let loginUrl = '{{ route('login') }}';
+    let appUrl = '{{ env('APP_URL') }}';
     // Loading button plugin (removed from BS4)
     (function ($) {
         $.fn.button = function (action) {

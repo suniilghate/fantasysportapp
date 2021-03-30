@@ -8,6 +8,8 @@ use App\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Response;
 
 class UserController extends AppBaseController
@@ -30,7 +32,7 @@ class UserController extends AppBaseController
     public function index(Request $request)
     {
         $users = $this->userRepository->all();
-
+        
         return view('users.index')
             ->with('users', $users);
     }
@@ -153,4 +155,42 @@ class UserController extends AppBaseController
 
         return redirect(route('users.index'));
     }
+
+    /**
+     * Add cash to wallet.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function add_cash(Request $request)
+    {
+        //We can record the transaction request and response to db at present I am sending back the required request parameters only
+        $returnRequest = ['key' => Config::get('custom.razor_key'), 'amount' => $request->amount * 100, 'companyname' => 'FSA', 'description' => 'Wallet refill', 'prefill' => ['name' => Auth::user()->name, 'email' => Auth::user()->email, 'contact' => (!empty(Auth::user()->mobile)) ? Auth::user()->mobile : '999-999-9999']];
+        return response()->json([
+            'success' => json_encode($returnRequest)
+        ]);
+    }
+
+    /**
+     * Add cash to wallet.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function save_transaction(Request $request)
+    {
+        //We have to record the transaction to db and do the wallet updates
+        $input = $request->all();
+        //Insert the transaction amount to user wallet
+        $userWallet = $this->userRepository->updateWallet($input);
+         
+        //dd($request->all());
+        return response()->json([
+            'success' => json_encode($userWallet)
+        ]);
+    }
+
+    
 }

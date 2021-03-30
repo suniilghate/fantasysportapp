@@ -20,6 +20,9 @@
                     Welcome, {{\Illuminate\Support\Facades\Auth::user()->name}}</div>
                 <a class="dropdown-item has-icon edit-profile" href="#" data-id="{{ \Auth::id() }}">
                     <i class="fa fa-user"></i>Edit Profile</a>
+                <a class="dropdown-item has-icon my-wallet" href="#" data-id="{{ \Auth::id() }}">
+                    <i class="fa fa-user"></i>My Wallet</a>
+
                 <a class="dropdown-item has-icon" data-toggle="modal" data-target="#changePasswordModal" href="#" data-id="{{ \Auth::id() }}"><i
                             class="fa fa-lock"> </i>Change Password</a>
                 <a href="{{ url('logout') }}" class="dropdown-item has-icon text-danger"
