@@ -62,4 +62,6 @@ class UserContest extends Model
     {
         return $this->hasMany(User::class, 'user_d');
     }
+
+    
 }

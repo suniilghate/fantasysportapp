@@ -44,5 +44,5 @@ class PlayerTeam extends Model
         'player_id' => 'required'
     ];
 
-    
+        
 }

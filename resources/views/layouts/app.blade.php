@@ -48,6 +48,7 @@
 @include('profile.change_password')
 @include('profile.edit_profile')
 @include('profile.my_wallet')
+@include('matches.playerslobby')
 
 </body>
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
@@ -62,6 +63,7 @@
 <script src="{{ asset('web/js/stisla.js') }}"></script>
 <script src="{{ asset('web/js/scripts.js') }}"></script>
 <script src="{{ mix('assets/js/profile.js') }}"></script>
+<script src="{{ mix('assets/js/match.js') }}"></script>
 <script src="{{ mix('assets/js/custom/custom.js') }}"></script>
 @yield('page_js')
 @yield('scripts')

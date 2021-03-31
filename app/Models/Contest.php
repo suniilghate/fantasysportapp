@@ -89,4 +89,6 @@ class Contest extends Model
     {
         return $this->belongsTo(Match::class, 'match_id');
     }
+
+    
 }

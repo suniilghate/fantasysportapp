@@ -38,8 +38,15 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('players', App\Http\Controllers\PlayersController::class);
 
     Route::get('matches/open/{id}', [App\Http\Controllers\MatchController::class, 'open_match'])->name('matches.open');
+    Route::get('matches/listcontests/{id}', [App\Http\Controllers\MatchController::class, 'list_contests'])->name('matches.listcontests');
+    Route::get('matches/joincontest/{id}', [App\Http\Controllers\MatchController::class, 'join_contest'])->name('matches.joincontest');
+
 
     Route::post('users/recordtransaction/{id}', [App\Http\Controllers\UserController::class, 'save_transaction'])->name('users.recordtransaction');
+
+    Route::get('contests/getcontestplayers/{id}', [App\Http\Controllers\ContestController::class, 'get_contest_players'])->name('contests.getcontestplayers');
+
+    Route::post('users/savelobyyplayers/{id}', [App\Http\Controllers\UserController::class, 'save_loby_players'])->name('users.savelobyyplayers');
         
     // Get Route For Show Payment Form
     //Route::get('paywithrazorpay', [App\Http\Controllers\RazorpayController::class, 'payWithRazorpay'])->name('paywithrazorpay');

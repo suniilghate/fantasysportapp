@@ -4,8 +4,12 @@ namespace App\Repositories;
 
 use App\Models\Match;
 use App\Models\Series;
+use App\Models\Contest;
 use App\Repositories\BaseRepository;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
+use function App\Models\Contests;
 
 /**
  * Class MatchRepository
@@ -60,6 +64,25 @@ class MatchRepository extends BaseRepository
             $matches = $matches->where('matches.id','=',$id)->get()->first();
         }                        
         return $matches;
+    }
+
+    //Fetch team1 and team2 names
+    public function fetch_contest_users($id = null)
+    {
+        $contests = DB::table('contests')
+                        ->leftjoin('user_contests', 'user_contests.contest_id', '=', 'contests.id')
+                        ->select('contests.id','contests.name','contests.match_id','contests.contest_type','contests.wining_amount','contests.entry_fee','contests.contest_total_users', 'user_contests.user_id')
+                        ->where([['contests.id','=',$id],['contests.status','=',2]])
+                        ->get()->toArray();
+        
+        /*
+        $contests = DB::table('contests')
+                        ->leftjoin('user_contests', 'user_contests.contest_id', '=', 'contests.id')
+                        ->select('contests.id', 'contests.name', 'contests.wining_amount', 'user_contests.contest_id', 'user_contests.user_id', DB::raw("count(user_contests.contest_id) as cnt"))->groupBy('contests.id')
+                        ->where('contests.id','=',$id)
+                        ->get()->toArray();*/
+        
+                            return $contests;
     }
 
     //Check match date with Series start date and end date

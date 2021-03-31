@@ -177,4 +177,12 @@ class ContestController extends AppBaseController
 
         return redirect(route('contests.index'));
     }
+
+    public function get_contest_players($match_id)
+    {
+        //return 'hi';
+        $contestPlayers = $this->contestRepository->fetchPlayers($match_id);
+        //dd($contestPlayers);
+        return $contestPlayers;
+    }    
 }

@@ -94,6 +94,25 @@ class MatchController extends AppBaseController
         return view('matches.show')->with('match', $match);
     }
 
+    public function list_contests($matchId) {
+        $contests = $this->matchRepository->getAll($matchId)->Contests;
+        $contestsUsers = [];
+        foreach($contests as $contest){
+            $contestsUsers[] = $this->matchRepository->fetch_contest_users($contest->id);
+        }
+        //dd($contestsUsers);
+        $contestsUsersFnl = [];
+        
+        foreach($contestsUsers as $k => $conuserVal){
+            $contestsUsersFnl[$k] = $conuserVal;
+            $contestsUsersFnl[$k]['userjoincount'] = 0;
+            if(count($conuserVal) > 1)
+                $contestsUsersFnl[$k]['userjoincount'] = count($conuserVal);
+        }
+        //dd($contestsUsersFnl);
+        return view('matches.listcontests')->with('usercontests', $contestsUsersFnl);
+    }
+
     public function open_match($matchId) {
         //update the match status| pool status | series status | sports status | team status | players status
         $matchObj = $this->matchRepository->getAll($matchId);

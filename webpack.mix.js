@@ -26,6 +26,7 @@ mix.styles([
 mix.js(
     'public/js/scripts.js', 'public/js/scripts.min.js')
     .js('resources/assets/js/profile.js', 'public/assets/js/profile.js')
+    .js('resources/assets/js/match.js', 'public/assets/js/match.js')
     .js('resources/assets/js/custom/custom.js', 'public/assets/js/custom/custom.js')
     .js('resources/assets/js/custom/custom-datatable.js', 'public/assets/js/custom/custom-datatable.js')
     .version();

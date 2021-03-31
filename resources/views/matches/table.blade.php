@@ -28,7 +28,10 @@
                     <div class='btn-group'>
                         <a href="{!! route('matches.show', [$match->id]) !!}" class='btn btn-light action-btn '><i class="fa fa-eye"></i></a>
                         @if(Config::get('fsa.status.matches')[$match->status] == 'Active')
-                        <a href="{!! route('matches.open', [$match->id]) !!}" class='btn btn-warning action-btn'><i class="fa fa-calendar"></i></a>
+                        <a href="{!! route('matches.open', [$match->id]) !!}" class='btn btn-warning action-btn'><i class="fa fa-unlock-alt"></i></a>
+                        @endif
+                        @if($match->status == 2)
+                        <a href="{!! route('matches.listcontests', [$match->id]) !!}" class='btn btn-warning action-btn'><i class="fa fa-list-ul"></i></a>    
                         @endif
                         <a href="{!! route('matches.edit', [$match->id]) !!}" class='btn btn-warning action-btn edit-btn'><i class="fa fa-edit"></i></a>
                         {!! Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger action-btn delete-btn', 'onclick' => 'return confirm("Are you sure want to delete this record ?")']) !!}

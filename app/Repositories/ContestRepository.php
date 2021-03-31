@@ -3,7 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Contest;
+use App\Models\PlayerTeam;
+use App\Models\Match;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class ContestRepository
@@ -59,5 +62,25 @@ class ContestRepository extends BaseRepository
         } 
         
         return $returnMsg;
+    }
+
+    public function fetchPlayers($match) {
+        list('team1' => $team1Id, 'team2' => $team2Id) = Match::find($match);
+
+        $matchPlayers = PlayerTeam::join('players as P', 'players_team.players_id', '=', 'P.id')
+                                    ->select('players_team.players_id', 'players_team.team_id','P.name','P.type')
+                                    ->whereIn('players_team.team_id', array($team1Id,$team2Id))
+                                    ->orderBy('P.type')
+                                    ->get();
+
+        $returnMatchPlayers = array();
+        foreach($matchPlayers as $k => $mpValue){
+            //if($mpValue['type'] == 2){
+                $teamBelongsTo = Match::select(DB::raw("(CASE WHEN team1='" . $mpValue->team_id . "' THEN 'Team1' WHEN team2='" . $mpValue->team_id . "' THEN 'Team2' END) as team"))->where('id','=',$match)->get()->first()->toArray();
+                $returnMatchPlayers[$mpValue->type][] = ['player' => $mpValue, 'team' => $teamBelongsTo['team']];
+            //}
+        }
+
+        return $returnMatchPlayers;
     }
 }

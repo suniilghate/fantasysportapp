@@ -192,5 +192,13 @@ class UserController extends AppBaseController
         ]);
     }
 
-    
+    public function save_loby_players(Request $request)
+    {
+        $input = $request->all();
+        $userContest = $this->userRepository->joinContest($input);
+        
+        return response()->json([
+            'success' => json_encode($userContest)
+        ]);
+    }
 }

@@ -12,7 +12,7 @@ class UserCombination extends Model
 
     use SoftDeletes;
 
-    public $table = 'user_transactions';
+    public $table = 'user_combinations';
     protected $dates = ['deleted_at'];
 
     /**
