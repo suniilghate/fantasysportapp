@@ -148,6 +148,7 @@ $(document).on('submit', '#selectLobyPlayers', function (event) {
       success: function success(result) {
         if (result.success) {
           console.log(result.success);
+          $('#PlayerLobbyModal').modal('hide');
         }
       },
       error: function error(result) {
