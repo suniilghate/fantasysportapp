@@ -99,7 +99,7 @@ $(document).on('submit', '#selectLobyPlayers', function (event) {
 
   } 
   
-  console.log(flagCheck);
+  /*console.log(flagCheck);
   console.log(myCheckboxes);
   console.log(team1Players);
   console.log(team2Players);
@@ -111,7 +111,7 @@ $(document).on('submit', '#selectLobyPlayers', function (event) {
   console.log(pbatsmanStatus);
   console.log(pwicketkeeperStatus);
   console.log(pallrounderStatus);
-  console.log(pbowlerStatus);
+  console.log(pbowlerStatus);*/
   
   //console.log(pbatsman.length);
   if (flagCheck) {

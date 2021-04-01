@@ -117,8 +117,7 @@ $(document).on('submit', '#selectLobyPlayers', function (event) {
     flagCheck = pallrounderStatus = checkCount(pallrounder.length, 3, 6);
     flagCheck = pbowlerStatus = checkCount(pbowler.length, 3, 6);
   }
-
-  console.log(flagCheck);
+  /*console.log(flagCheck);
   console.log(myCheckboxes);
   console.log(team1Players);
   console.log(team2Players);
@@ -126,10 +125,12 @@ $(document).on('submit', '#selectLobyPlayers', function (event) {
   console.log(pwicketkeeper);
   console.log(pallrounder);
   console.log(pbowler);
-  console.log(pbatsmanStatus);
+   console.log(pbatsmanStatus);
   console.log(pwicketkeeperStatus);
   console.log(pallrounderStatus);
-  console.log(pbowlerStatus); //console.log(pbatsman.length);
+  console.log(pbowlerStatus);*/
+  //console.log(pbatsman.length);
+
 
   if (flagCheck) {
     $.ajax({
