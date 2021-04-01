@@ -11,9 +11,9 @@ $(document).on('click', '.edit-profile', function (event) {
 });
 $(document).on('click', '.my-wallet', function (event) {
   $('#userID').val(loggedInUser.id);
-  $('#walletTdCB').html((typeof loggedInUserBalance.current_balance !== 'undefined') ? loggedInUserBalance.current_balance : 0.00 );
-  $('#walletTdBA').html((typeof loggedInUserBalance.bonus_amount !== 'undefined') ? loggedInUserBalance.bonus_amount : 0.00 );
-  $('#walletTdDA').html((typeof loggedInUserBalance.deposit_amount !== 'undefined') ? loggedInUserBalance.deposit_amount : 0.00 );
+  $('#walletTdCB').html(typeof loggedInUserBalance.current_balance !== 'undefined' ? loggedInUserBalance.current_balance : 0.00);
+  $('#walletTdBA').html(typeof loggedInUserBalance.bonus_amount !== 'undefined' ? loggedInUserBalance.bonus_amount : 0.00);
+  $('#walletTdDA').html(typeof loggedInUserBalance.deposit_amount !== 'undefined' ? loggedInUserBalance.deposit_amount : 0.00);
   $('#UserWalletModal').appendTo('body').modal('show');
 });
 $(document).on('change', '#pfImage', function () {
