@@ -95,6 +95,7 @@ $(document).on('submit', '#addCashWalletForm', function (event) {
                             console.log(result.success);
                             if (result.success)
                             {
+                              //location.reload();
                               $('#UserWalletModal').modal('hide');
                             }
                         },
