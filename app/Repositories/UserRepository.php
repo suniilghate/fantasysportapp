@@ -66,7 +66,7 @@ class UserRepository extends BaseRepository
             $deposit_amount = $userWallet->deposit_amount - $data['entry_fee'];
         }
         $previous_balance = $userWallet->current_balance;
-        $current_balance = $deposit_amount + $wining_amount + $deposit_amount;
+        $current_balance = $deposit_amount + $wining_amount + $bonus_amount;
 
         try {
             // Begin a transaction
@@ -115,11 +115,11 @@ class UserRepository extends BaseRepository
         //fetch the current wallet data
         $userWallet = Auth::user()->latestbalance();
         
-        $bonus_amount = $userWallet->bonus_amount;
-        $deposit_amount = $userWallet->deposit_amount + $data['transaction_amount'];
-        $previous_balance = $userWallet->current_balance;
-        $wining_amount = $userWallet->wining_amount;
-        $current_balance = $deposit_amount + $wining_amount + $deposit_amount;
+        $bonus_amount = (isset($userWallet->bonus_amount)) ? $userWallet->bonus_amount : 0.00;
+        $deposit_amount = (isset($userWallet->deposit_amount)) ? $userWallet->deposit_amount + $data['transaction_amount'] : $data['transaction_amount'];
+        $previous_balance = (isset($userWallet->current_balance)) ? $userWallet->current_balance : 0.00;
+        $wining_amount = (isset($userWallet->wining_amount)) ? $userWallet->wining_amount : 0.00;
+        $current_balance = $bonus_amount + $deposit_amount + $wining_amount;
 
         try {
             // Begin a transaction
